@@ -1,0 +1,149 @@
+
+
+In doing assignment 8, please do not rely on this pseudocode at all, as it is not real code and is only a schema. 
+Also before reading this pseudcode, first present your own pseudcode, 
+and then compare it with yours before writingthe main code. 
+You need to revise this pseudocode and remove its possible errors before writing your own code.   
+If you decide to change the name of some variables, please select meaningful names for them. 
+Here the index r has been used for row and the index col for column.
+
+
+
+Pseudocode Level 1:
+
+ 
+If the size is 2, then solve the problem
+else
+{
+         Divide the problem into 4 different sub-problems
+         Recognize where the black cell is located
+         Put a tile in the centre based on the location of balck cell 
+		 Call Arrange for each of the four sub-problems, which now each have a black cell
+}
+Print(n) the corresponding table
+**********************************************************************
+
+**********************************************************************   
+PseudoCode Level 2:
+$n=power(2,$m)
+$TileNo=1; //A global variable showing the number of the current tile
+$Location // A global two dimension array
+Arrange(1,$n,1,$n,$p,$q) //p and q show the associated row and column of the black cell
+Print() //Print Location
+
+
+
+Arrange($r1,$r2,$col1,$col2,$rfilled,$cfilled) 
+{
+    global $Location, $TileNo;   
+    If ($r2-$r1==1) //A solvable block with size 2 
+    {
+           for ($r=$r1,$r2;$r++)
+           {       
+                    for ($col=$col1,$col2;$col++)
+                             if ($r != $rfilled  ||  $col != $cfilled) $[$r][$col]}']=$TileNo;
+           }
+           $TileNo= $TileNo+1;   
+      }     
+    } 
+   else // The size is large and hence divide and conquer is needed
+   {   
+         $Middle_row=(r1+r2-1)/2;
+         $Middle_col=(col1+col2-1)/2;
+         If ( $rfilled <= $ Middle_row && $cfilled   <=  $Middle_col)   $Situation=”upper_left”;
+         elseif ($rfilled <= $ Middle_row && $cfilled >  $Middle_col)   $Situation=”upper_right”;
+         elseif ($rfilled >  $ Middle_row && $cfilled <= $Middle_col)   $Situation=”lower_left”;
+         elseif ($rfilled >  $ Middle_row && $cfilled >  $Middle_col)   $Situation=”lower_right”
+   
+         switch ($Situation) {
+           case “upper_left”:
+              Arrange($r1,$Middle_row,$col1,Middle_col ,$rfilled, $cfilled)
+              Arrange($r1,$Middle_row, $Middle_col+1,$col2 ,$Middle_row,$Middle_col+1)
+              Arrange($Middle_row+1,$r2,$col1,$Middle_col,$Middle_row+1, $Middle_col)
+              Arrange($Middle_row+1,$r2,$Middle_col+1,$col2,$Middle_row+1, $Middle_col+1)
+               //$[$Middle_row][$Middle_col]= TileNo;//note that it is omitted
+              $[$Middle_row][$Middle_col+1]= TileNo;
+              $[$Middle_row+1][$Middle_col]= TileNo;
+              $Location[$Middle_row+1][$Middle_col+1]= TileNo;
+               break;
+            case " upper_right":
+             Arrange($r1,$Middle_row,$col1,Middle_col ,$Middle_row, $Middle_col)
+             Arrange($r1,$Middle_row, $Middle_col+1,$col2 ,$rfilled, $cfilled)
+             Arrange($Middle_row+1,$r2,$col1,$Middle_col,$Middle_row+1, $Middle_col)
+             Arrange($Middle_row+1,$r2,$Middle_col+1,$col2,$Middle_row+1, $Middle_col+1)
+             $[$Middle_row][$Middle_col]= TileNo;
+             //$[$Middle_row][$Middle_col+1]= TileNo;//note that it is omitted
+             $[$Middle_row+1][$Middle_col]= TileNo;
+             $[$Middle_row+1][$Middle_col+1]= TileNo;
+             break;
+            case ”lower_left”;
+                Arrange($r1,$Middle_row,$col1,Middle_col ,$Middle_row, $Middle_col)
+                Arrange($r1,$Middle_row, $Middle_col+1,$col2 ,$Middle_row,$Middle_col+1)
+                Arrange($Middle_row+1,$r2,$col1,$Middle_col,$rfilled, $cfilled)
+                Arrange($Middle_row+1,$r2,$Middle_col+1,$col2,$Middle_row+1, $Middle_col+1)
+                $[$Middle_row][$Middle_col]= TileNo;
+                $[$Middle_row][$Middle_col+1]= TileNo;
+                //$[$Middle_row+1][$Middle_col]= TileNo;//note that it is omitted
+                $Location[$Middle_row+1][$Middle_col+1]= TileNo;
+                break;
+            case ”lower_right”;                   
+                Arrange($r1,$Middle_row,$col1,Middle_col ,$Middle_row, $Middle_col)
+                Arrange($r1,$Middle_row, $Middle_col+1,$col2 ,$Middle_row,$Middle_col+1)
+                Arrange($Middle_row+1,$r2,$col1,$Middle_col,$Middle_row+1, $Middle_col)
+                Arrange($Middle_row+1,$r2,$Middle_col+1,$col2,$rfilled,$cfilled)
+                $[$Middle_row][$Middle_col]= TileNo;
+                $[$Middle_row][$Middle_col+1]= TileNo;
+                $[$Middle_row+1][$Middle_col]= TileNo;
+                //$Location[$Middle_row+1][$Middle_col+1]= TileNo;//note that it is omitted 
+                break;
+     }
+     $TileNo= $TileNo+1;   
+   } //end of else
+} //end of procedure
+
+
+
+
+
+
+Print()
+{
+  global $Location;
+  echo ('<table>')
+  foreach ($Location as $row) { 
+     echo('<tr>');
+	 foreach ($row as $cell) { 
+         echo('<td>' . $cell . '</td>'); 
+     }
+     echo('</tr>');	 
+  }
+  echo (</table>)
+}
+
+
+Print()
+{
+  global $Location;
+  echo ('<table>')
+  foreach ($Location as $row) { 
+     echo('<tr>');
+	 foreach ($row as $cell) { 
+         $red=$cell*7%255;
+		 $green=$cell*11%255;
+		 $blue=$cell*17%255
+		 echo("<td bgcolor=rgb($red,$green,$blue)>" . $cell . '</td>'); 
+     }
+     echo('</tr>');	 
+  }
+  echo (</table>)
+  
+}
+Note :The bgcolor attribute of <td> is not supported in HTML5. Use CSS instead.
+
+An Example for CSS syntax is: <td style="background-color:rgb(100,200,120)">
+
+
+1) Running the program for m=1  2*2
+2) Running the program for m=2  4*4
+3) Running the program for m=3  8*8
+

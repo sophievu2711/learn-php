@@ -1,0 +1,41 @@
+<html>
+<script>
+var calculatorForm = '<p>Please enter details below to calculte what your re-payment will be weekly. </p> <form action="twoPage.php" method="get"><fieldset><legend>Mortgage details</legend>Amount of Mortgage: <br><input type="text" name="mortgage_amount"><br>Interest rate: <br><input type="text" name="rate"><br>Number of years: <br><input type="text" name="years"><br></fieldset><br><input type="submit" value ="Calculate"></form>';
+
+function show_Form() {
+  var person = prompt("Please enter your name");
+  if (person != null) {
+    document.getElementById("HelloCustomer").innerHTML =
+    "<b>Hello</b> " + person + "<b>! How are you today?</b>" + calculatorForm ;
+  }
+}
+
+</script>
+
+<body>
+	<table width="1024px" border="0" align="center">
+	  <tr>
+		<td colspan="2" 
+			style="background-color:#f2eedb;">
+			<!-- (2) Input form -->
+			<h2>Two-page form</h2>
+			<img width="100%" src="https://www.augustconsultingindia.com/images/services_banner.jpg">
+		</td> 
+	  </tr>	
+	  
+	  <tr>
+		<td style="background-color:#a8806d; color:#ffffff"
+			width="400px">		
+			<button id="start" onClick="show_Form()">Click to start</button>
+			<br>
+			<p id="HelloCustomer"></p>
+			<br>
+		</td>
+		<td>
+			<img width="624px" src="https://blogassets.upstart.com/wp-content/uploads/2014/08/loan-calculator.jpg">
+		</td>
+	  </tr>
+	  
+	</table>
+</body>
+</html>

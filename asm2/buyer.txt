@@ -1,0 +1,4 @@
+0_name|1_phone|2_plate_number|3_proposed_price
+Hung Tran,0415673686,HGB76U,15000,
+
+a,abc@gmail.com,a,{a;a;a},{a;a;a},
